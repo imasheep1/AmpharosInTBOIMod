@@ -1,5 +1,5 @@
 <AnimatedActor>
-	<Info CreatedBy="Unknown" CreatedOn="6/5/2021 8:42:13 PM" Version="12" Fps="30"/>
+	<Info CreatedBy="Unknown" CreatedOn="2/20/2023 10:39:13 AM" Version="13" Fps="30"/>
 	<Content>
 		<Spritesheets>
 			<Spritesheet Path="charactermenualt.png" Id="0"/>
@@ -17,7 +17,7 @@
 			</RootAnimation>
 			<LayerAnimations>
 				<LayerAnimation LayerId="0" Visible="true">
-					<Frame XPosition="3" YPosition="0" XPivot="31" YPivot="20" XCrop="228" YCrop="941" Width="46" Height="58" XScale="100" YScale="100" Delay="1" Visible="true" RedTint="255" GreenTint="255" BlueTint="255" AlphaTint="255" RedOffset="0" GreenOffset="0" BlueOffset="0" Rotation="0" Interpolated="false"/>
+					<Frame XPosition="3" YPosition="0" XPivot="31" YPivot="20" XCrop="95" YCrop="945" Width="51" Height="48" XScale="100" YScale="100" Delay="1" Visible="true" RedTint="255" GreenTint="255" BlueTint="255" AlphaTint="255" RedOffset="0" GreenOffset="0" BlueOffset="0" Rotation="0" Interpolated="false"/>
 				</LayerAnimation>
 			</LayerAnimations>
 			<NullAnimations/>
