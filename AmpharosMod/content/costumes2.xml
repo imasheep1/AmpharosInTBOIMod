@@ -1,0 +1,6 @@
+<costumes anm2root="gfx/characters/">
+	<costume anm2path="ampharosbody.anm2" type="none" priority="99"/>
+	<costume anm2path="ampharosbodyalt.anm2" type="none" priority="99"/>
+	<costume anm2path="amphhorn.anm2" type="none" priority="99"/>
+	<costume anm2path="amphhornalt.anm2" type="none" priority="99"/>
+</costumes>
