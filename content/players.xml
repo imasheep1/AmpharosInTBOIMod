@@ -1,12 +1,12 @@
 <players root="gfx/characters/costumes/" 
          portraitroot="gfx/ui/stage/" 
          nameimageroot="gfx/ui/boss/">
-	<player name="Ampharos" skin="ampharos.png" costume="Ampharos.anm2" hp="8" bombs="1" 
+	<player name="Ampharos" skin="ampharos.png" costume="Ampharos.anm2" hp="8" bombs="0" 
           nameimage="AmphName.png" 
           portrait="Amphlarge.png" 
           bigportrait="AmphLarge.png" skinColor="-1" 
 		  birthright="Shocking" />
-	<player name="AmpharosAlt" skin="ampharos_b.png" costume="Ampharos.anm2" hp="8" bombs="1" 
+	<player name="AmpharosAlt" skin="ampharos_b.png" costume="Ampharos.anm2" hp="6" bombs="0" 
           nameimage="AmphName.png" 
           portrait="amphlarge_b.png" 
           bigportrait="amphlarge_b.png" skinColor="0" 
