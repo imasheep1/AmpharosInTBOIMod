@@ -1,6 +1,5 @@
 -- Pure Ampharos character data. Conf at top, code at bottom.
 -- Derived from wofsauge's character template. I have no shame.
-print("Ampharos loaded")
 
 -- Stats are NOT multipliers over Isaac's default stats. They are directly set.
 local stats = {
