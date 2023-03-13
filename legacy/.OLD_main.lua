@@ -1,3 +1,5 @@
+// legacy
+
 local mod = RegisterMod("Ampharos", 1) -- Replace the Mod name with something unique.
 local playerName = "Ampharos" -- the name of your character (from the players.xml file)
 local taintedName = "AmpharosAlt" -- set this to nil if your tainted character doens't use a different name
