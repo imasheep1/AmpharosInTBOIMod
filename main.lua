@@ -1,3 +1,4 @@
 -- Init
-local mod RegisterMod("Ampharos", 1)
-require("lua.characters.pAmpharos")
+modAITB = RegisterMod("Ampharos", 1)
+require("lua.characters.ampharos")
+require("lua.characters.tampharos")

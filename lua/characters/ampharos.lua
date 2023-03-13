@@ -25,7 +25,7 @@ local config = Isaac.GetItemConfig()
 local game = Game()
 
 
-mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, function(_, player, cache)
+modAITB:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, function(_, player, cache)
     -- Obviously only run the callback if you're playing as Ampharos
     if (player:GetPlayerType() == char) then
         if (cache & CacheFlag.CACHE_DAMAGE == CacheFlag.CACHE_DAMAGE) then
@@ -61,7 +61,7 @@ mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, function(_, player, cache)
     end
 end)
 
-mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, function(_, player)
+modAITB:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, function(_, player)
     if (player:GetPlayerType() == char) then 
         for i = 1, #AppliedCostume do
             local cost = Isaac.GetCostumeIdByPath("gfx/characters/" .. AppliedCostume[i] .. ".anm2")
