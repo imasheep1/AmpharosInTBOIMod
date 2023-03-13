@@ -1,6 +1,6 @@
 -- Tainted Ampharos character data. Conf at top, code at bottom.
 -- Derived from wofsauge's character template. I have no shame.
-
+print("AmpharosAlt loaded")
 
 -- Stats are NOT multipliers over Isaac's default stats. They are directly set.
 local stats = {
@@ -16,7 +16,7 @@ local stats = {
     luck = -1.00 -- default is 0.00
 }
 
-local char = Isaac.GetPlayerTypeByName("AmpharosAlt", false)
+local char = Isaac.GetPlayerTypeByName("AmpharosAlt", true)
 local costume = {"ampharosbodyalt","amphhornalt"}
 
 
@@ -38,13 +38,13 @@ modAITB:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, function(_, player, cache)
             player.ShotSpeed = stats.shotspeed
         end
         if (cache & CacheFlag.CACHE_RANGE == CacheFlag.CACHE_RANGE) then
-            player.Range = stats.range
+            player.TearHeight = stats.range
         end
         if (cache & CacheFlag.CACHE_SPEED == CacheFlag.CACHE_SPEED) then
             player.MoveSpeed = stats.speed
         end
         if (cache & CacheFlag.CACHE_LUCK == CacheFlag.CACHE_LUCK) then
-            player.Luck = player.Luck * stats.default.luck
+            player.Luck = stats.luck
         end
 
         if (cache & CacheFlag.CACHE_FLYING == CacheFlag.CACHE_FLYING) then
@@ -63,12 +63,12 @@ end)
 
 modAITB:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, function(_, player)
     if (player:GetPlayerType() == char) then 
-        for i = 1, #AppliedCostume do
-            local cost = Isaac.GetCostumeIdByPath("gfx/characters/" .. AppliedCostume[i] .. ".anm2")
+        for i = 1, #costume do
+            local cost = Isaac.GetCostumeIdByPath("gfx/characters/" .. costume[i] .. ".anm2")
             if (cost ~= -1) then
                 player:AddNullCostume(cost)
             else
-                print("gfx/characters/" .. AppliedCostume[i] .. ".anm2 not found, check spelling?")
+                print("gfx/characters/" .. costume[i] .. ".anm2 not found, check spelling?")
             end
         end
     end

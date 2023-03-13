@@ -1,4 +1,4 @@
 -- Init
 modAITB = RegisterMod("Ampharos", 1)
 require("lua.characters.ampharos")
-require("lua.characters.tampharos")
+require("lua.characters.ampharosalt")
