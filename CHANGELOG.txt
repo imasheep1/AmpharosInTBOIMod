@@ -1,0 +1,40 @@
+-- V1.8 --
+*Tainted Ampharos no longer uses placeholder artwork
+*Tainted Ampharos has been temporarily changed to be a clone of Ampharos with one less starting red heart
+*Ampharos has received minor stat changes
+    +Ampharos should be twice as fast as before, leading to less annoying and more fair gameplay
+    -Ampharos no longer starts with the Jacob's Ladder item; just its tear effect
+    -Ampharos no longer starts with a bomb
+*Lua has been redone mostly from scratch
+    *Still a thank you to manaphoenix, whose template served as a solid base to trim down
+*Directory structure has been changed to make the mod more extensible in the future
+*Other changes
+
+-- V1.7: BIG UPDATE --
+*COMPLETELY REDID THE MAIN.LUA USING MANAPHOENIX'S CHARACTER TEMPLATE 
+    *(Thanks for making this and adding the features for it, you made this mod much better lol)
+
++Added Tainted Ampharos
+    *Unfinished
+    *Lacking main item and gimmick
+    *Unfinished stats
+    *Literally just normal ampharos but reskinned and without Jacob's Ladder
+    *You can play them if you want, but I would recommend sticking to the normal version
+    *Yes I know the sprite between floors just says "Placeholder", thats intentional 
++Added door sprite for T. Ampharos
++Added the stuff for both the placeholder character select screen and final characrer select screen
++Added costumes 
+    +Ampharos Tail
+    +Ampharos ears/head gem
+    +T. Ampharos Tail
+    +T. Ampharos head gem
++Added a bit of life to the tail
+    *It moves a bit when walking like tails should
+*FINALLY THE ISSUE WITH THE TAIL BEING IN FRONT OF YOU WHEN WALKING UP IS FIXED WOOOOOOOO
+    +As a bonus they stay with you when you get items
+*Rebalanced the stats
+-Removed the costume for the Jacob's Ladder starting item 
+    *Only applies to the starting one Ampharos gets
+
+-- V1.6: N/A -- 
+*Patch notes for these versions are missing...
