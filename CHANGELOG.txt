@@ -36,5 +36,21 @@
 -Removed the costume for the Jacob's Ladder starting item 
     *Only applies to the starting one Ampharos gets
 
--- V1.6: N/A -- 
-*Patch notes for these versions are missing...
+-- V1.6 -- 
+*Fixed an issue where some costumes didn't appear correctly on the character
+
+-- V1.5: The Repentance Update --
+*Made the mod compatible with Repentance by uploaing it as a new mod
+
+-- V1.4 --
+*Changed some of the Steam screenshots to be more accurate to the mod
+
+-- V1.3 --
++Added the forehead gem to the boss and mid-floor screens
++Redid the tail gem on the mid-floor screen to be shaded better
+
+-- V1.2 --
+*Fixed the issues that caused the entire main.lua to not work
+
+-- V1.1 --
+*Changed the size of Ampharos' name on the boss screen
