@@ -61,7 +61,8 @@ modAITB:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, function(_, player, cache)
 end)
 
 modAITB:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, function(_, player)
-    if (player:GetPlayerType() == char) then 
+    -- Obviously only run the callback if you're playing as Ampharos
+    if (player:GetPlayerType() == char) then
         for i = 1, #costume do
             local cost = Isaac.GetCostumeIdByPath("gfx/characters/" .. costume[i] .. ".anm2")
             if (cost ~= -1) then
