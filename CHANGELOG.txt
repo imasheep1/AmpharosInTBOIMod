@@ -1,3 +1,11 @@
+-v1.8.1-
+*Tainted Ampharos has received additional stat changes
+    *Tainted Ampharos has slightly reduced attack, slightly increased fire rate, and decreased luck
+    *These are subject to change upon their mechanics being finalized
+*Fixed a bug where Ampharos' stats were unaffected by any stat-changing items or effects
+*Redid Lua from scratch again to prepare for future changes
+
+
 -- V1.8 --
 *Tainted Ampharos no longer uses placeholder artwork
 *Tainted Ampharos has been temporarily changed to be a clone of Ampharos with one less starting red heart
