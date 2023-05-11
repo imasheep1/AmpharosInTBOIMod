@@ -5,7 +5,7 @@ sheepCosts = {}
 
 local costumes = {
     pure = {"ampharosbody", "amphhorn"},
-    tainted = {"ampharosaltbody", "amphalthorn"}
+    tainted = {"ampharosbodyalt", "amphhornalt"}
 }
 
 local function getCosts(player)

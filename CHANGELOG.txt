@@ -1,3 +1,6 @@
+-v1.8.2-
+*Fixed a bug where Tainted Ampharos' horn and tail costumes would not be applied
+
 -v1.8.1-
 *Tainted Ampharos has received additional stat changes
     *Tainted Ampharos has slightly reduced attack, slightly increased fire rate, and decreased luck
