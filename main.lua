@@ -5,5 +5,6 @@
 
 -- Init
 modAITB = RegisterMod("Ampharos", 1)
-include("luaAITB.callbacks.evaluateCache")
-include("luaAITB.callbacks.postPlayerInit")
+include("luaAITB.callbacks.EvaluateCache")
+include("luaAITB.callbacks.PostPlayerInit")
+include("luaAITB.attacks.thunder.Thunder")
