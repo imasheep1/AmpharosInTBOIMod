@@ -4,7 +4,13 @@
     -- Sanio, for inspiration and mod structure examples
 
 -- Init
-modAITB = RegisterMod("Ampharos", 1)
-include("luaAITB.callbacks.EvaluateCache")
-include("luaAITB.callbacks.PostPlayerInit")
-include("luaAITB.attacks.thunder.Thunder")
+
+AmpharosInTBOIModGlobals = {
+    ModRef = RegisterMod("Ampharos", 1),
+    Thunder = require("luaAmpharosMod.attacks.thunder.Thunder")
+}
+
+require("luaAmpharosMod.callbacks.EvaluateCache")
+require("luaAmpharosMod.callbacks.PostPlayerInit")
+require("luaAmpharosMod.callbacks.PostUpdate")
+
