@@ -1,5 +1,4 @@
-local thunder = AmpharosInTBOIModGlobals.Thunder
-local star = thunder:GiveStar()
+local star = require("luaAmpharosMod.attacks.thunder.SimpleTargetReticle")
 
 AmpharosInTBOIModGlobals.ModRef:AddCallback(ModCallbacks.MC_POST_UPDATE, function()
     if (
@@ -7,7 +6,7 @@ AmpharosInTBOIModGlobals.ModRef:AddCallback(ModCallbacks.MC_POST_UPDATE, functio
             Input.IsActionPressed(ButtonAction.ACTION_SHOOTRIGHT, 0) or
             Input.IsActionPressed(ButtonAction.ACTION_SHOOTUP, 0) or
             Input.IsActionPressed(ButtonAction.ACTION_SHOOTDOWN, 0)) then
-        star:TrySpawn()
+        star:TrySpawn(Isaac.GetPlayer())
     end
     star:OnPostUpdate()
 end)

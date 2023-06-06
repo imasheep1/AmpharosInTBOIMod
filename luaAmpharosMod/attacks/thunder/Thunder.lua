@@ -1,10 +1,6 @@
 local thunder = {}
 
-local star = require("luaAmpharosMod/attacks/thunder/SimpleTargetReticle")
-
-function thunder:Init()
-    star:Init(Isaac.GetPlayer())
-end
+star = require("luaAmpharosMod/attacks/thunder/SimpleTargetReticle")
 
 function thunder:GiveStar() return star end
 
