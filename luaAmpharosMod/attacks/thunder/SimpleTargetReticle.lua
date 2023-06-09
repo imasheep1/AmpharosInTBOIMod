@@ -1,9 +1,9 @@
 --[[
-
-    Simple Targeting Reticle library (libstar) by IAG
-    TODO: Write a wiki because this code is kinda messy
-    Also TODO: Could use a rewrite
-
+    Copyright (c) 2023 IAG
+    
+    Simple Targeting Reticle library (libstar) Core edition, v0.2.0
+    For your convenience, a copy of libstar's license is included at the bottom
+    of this file. You may therefore omit the license file when using this library.
 ]]--
 
 local star = {}
@@ -11,17 +11,15 @@ local star = {}
 
 -- This placeholder spawns an explosion and despawns the reticle.
 local onTriggerPlaceholder = function(star)
-    reticleEntity = star.reticle.entity
-    Isaac.Explode(reticleEntity.Position, reticleEntity, 80)
+    Isaac.Explode(star.reticle.entity.Position, star.reticle.entity, 80)
     star:Despawn()
 end
 
--- This placeholder is a linear curve that starts at 5 and ends at 1
+-- This placeholder is a piecewise function
 local flashFunctionPlaceholder = function(tickNumber)
-    if tickNumber > 40 then return 1 -- tick
-    else
-        -- f(0)=5; f(8)=4; f(16)=3; f(24)=3; f(32)=2; f(40)=1
-        return math.floor((5 - tickNumber/10) + 0.5)
+    if tickNumber > 40 then return 1
+    elseif tickNumber > 30 then return 2
+    else return 3
     end
 end
 
@@ -44,9 +42,9 @@ star.config = {
     },
 
     firing = {
-        fireInterval = 45, -- 1.5 seconds
+        fireAt = 45, -- 1.5 seconds
         disarmedUntil = 0, -- 0 seconds
-        fireGap = 20, -- 0.5 seconds
+        fireGap = 20, -- 0.667 seconds
         onTrigger = onTriggerPlaceholder,
     },
 
@@ -73,7 +71,7 @@ star.reticle = {
         bright = false, -- Is it in its bright state?
     },
     movement = {
-        angleOffset = 0, -- Add this angle to any other angle calculation in movement
+        angleOffset = 0, -- Add this angle to any angle calculations in movement
         velocityMultiplier = 1, -- Self-explanatory
         lerpProgress = 1, -- Used as a float in lerp calculations
         lerpSource = Vector(0,0), -- Starting vector for lerp calculations
@@ -91,7 +89,7 @@ function star:TrySpawn(player)
     if self.reticle.states.exists or self.reticle.timers.cooldown > 0 then return nil end
 
     -- T.V.S, pos, vel, parent entity(?)
-    self.reticle.entity = Isaac.Spawn(self.config.appearance.entityType, 
+    self.reticle.entity = Isaac.Spawn(self.config.appearance.entityType,
                                       self.config.appearance.entityVariant,
                                       self.config.appearance.entitySubtype,
                                       player.Position, Vector(0, 0), nil)
@@ -128,19 +126,25 @@ function star:Animate()
     -- Don't blink too fast
     waitNeeded = self.config.appearance.flashFunction(self.reticle.timers.fromSpawn)
     self.reticle.timers.flashFrame = self.reticle.timers.flashFrame + 1
-    if self.reticle.timers.flashFrame < waitNeeded then return nil end
-    
+    if self.config.appearance.brightWhileFiring and self.reticle.states.firing then
+        self.reticle.states.bright = true
+    elseif self.config.appearance.dimWhileNotArmed and not self.reticle.states.armed then
+        self.reticle.timers.flashFrame = 0
+        self.reticle.states.bright = false
+
+    elseif self.reticle.timers.flashFrame >= waitNeeded then
+        self.reticle.timers.flashFrame = 0
+        self.reticle.states.bright = not self.reticle.states.bright
+    end
+
     -- Blink
     if self.reticle.states.bright then
-        self.reticle.states.bright = false
         self.reticle.entity:SetSpriteFrame(self.config.appearance.animName, 
-                                           self.config.appearance.dimFrame)
-    else
-        self.reticle.states.bright = true
-        self.reticle.entity:SetSpriteFrame(self.config.appearance.animName,
                                            self.config.appearance.brightFrame)
+    else
+        self.reticle.entity:SetSpriteFrame(self.config.appearance.animName,
+                                           self.config.appearance.dimFrame)
     end
-    self.reticle.timers.flashFrame = 0
 end
 
 -- Thank you to Lytebringr for his control hijack tutorial (Episode 023, check it out)
@@ -159,7 +163,10 @@ function star:KeyboardMove()
     y = 0; if up   then y=y-1 end; if down  then y=y+1 end
 
     targetVector = Vector(x,y)
-    targetVector:Resize(self.config.movement.maxVelocity)
+    targetVector:Resize(self.config.movement.maxVelocity * 
+                        self.reticle.movement.velocityMultiplier) -- this normalizes
+    targetVector = targetVector:Rotated(-1 * self.reticle.movement.angleOffset) -- rotate by offset
+
     -- Don't lerp between not moving and moving when just starting out
     -- TODO: This is dumb, make it suck less
     if self.reticle.timers.fromSpawn <= 1 then
@@ -177,8 +184,8 @@ function star:KeyboardMove()
                                          self.config.movement.lerpStep
     if (self.reticle.movement.lerpProgress >= 1) then self.reticle.movement.lerpProgress = 1 end
     -- Non-mutating lerp function taken from the wiki -- thank you
-    newVelocity = self.reticle.movement.lerpSource * (1 - self.reticle.movement.lerpProgress) +
-                  self.reticle.movement.lerpTarget * self.reticle.movement.lerpProgress
+    newVelocity = self.reticle.movement.lerpSource * (1 - self.reticle.movement.lerpProgress)
+                + self.reticle.movement.lerpTarget * self.reticle.movement.lerpProgress
     self.reticle.entity.Velocity = newVelocity
 end
 
@@ -211,19 +218,38 @@ function star:OnPostUpdate()
     self:Animate()
 
     -- Arm for firing 
-    if not self.reticle.states.armed and 
-           self.config.firing.disarmedUntil < self.reticle.timers.fromSpawn and
-           not self.reticle.states.firing then
+    if not self.reticle.states.armed and
+           self.reticle.timers.fromSpawn >= self.config.firing.disarmedUntil then
         self.reticle.states.armed = true
+        print("armed")
+
     end
     -- Trigger firing
-    if self.reticle.states.armed and self.config.firing.fireInterval < self.reticle.timers.fromSpawn then
+    if self.reticle.states.armed and self.reticle.timers.fromSpawn >= 
+                                     self.config.firing.fireAt then
         self.reticle.states.firing = true
-        self.reticle.states.armed = false
-
         self.config.firing.onTrigger(self)
+        print("firing")
     end
 end
 
 return star
 
+--[[
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+associated documentation files (the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or
+substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
+OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+]]--
