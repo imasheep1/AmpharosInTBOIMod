@@ -1,4 +1,4 @@
-sheepStats = {}
+local sheepStats = {}
 
 -- This no longer uses direct stat setting as it broke very easily. Using bonuses allows for
 -- proper damage multipliers as well. See the key name for what operation should be performed 
@@ -16,7 +16,7 @@ local bonuses = {
     }
 }
 
-local function getStats(player)
+local function GetStats(player)
     if player:GetPlayerType() == Isaac.GetPlayerTypeByName("Ampharos", false) then
         return bonuses.pure
     elseif player:GetPlayerType() == Isaac.GetPlayerTypeByName("AmpharosAlt", true) then
@@ -26,8 +26,8 @@ end
 
 -- The player's stats are reevaluated each time the player picks up something
 -- that changes them. Additive and multiplicative bonuses work without hacks.
-function sheepStats:calcStats(player, cacheFlag)
-    local stats = getStats(player)
+function sheepStats:CalcStats(player, cacheFlag)
+    local stats = GetStats(player)
     if stats == nil then return nil end -- this hurts me a little bit
     
     if (cacheFlag & CacheFlag.CACHE_DAMAGE == CacheFlag.CACHE_DAMAGE) then

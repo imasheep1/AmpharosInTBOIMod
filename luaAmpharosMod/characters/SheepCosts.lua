@@ -1,14 +1,14 @@
 -- This is pretty temporary. CCP takes a bit too much work to add it 
 -- this early on in development. We don't even have costume edits.
 
-sheepCosts = {}
+local sheepCosts = {}
 
 local costumes = {
     pure = {"ampharosbody", "amphhorn"},
     tainted = {"ampharosbodyalt", "amphhornalt"}
 }
 
-local function getCosts(player)
+local function GetCosts(player)
     if player:GetPlayerType() == Isaac.GetPlayerTypeByName("Ampharos", false) then
         return costumes.pure
     elseif player:GetPlayerType() == Isaac.GetPlayerTypeByName("AmpharosAlt", true) then
@@ -16,15 +16,15 @@ local function getCosts(player)
     else return nil end
 end
 
-function sheepCosts:applyCosts(player)
-    local costs = getCosts(player)
+function sheepCosts:ApplyCosts(player)
+    local costs = GetCosts(player)
     if costs == nil then return end
     for i = 1, #costs do
-        local cost = Isaac.GetCostumeIdByPath("gfx/characters/" .. costs[i] .. ".anm2")
+        local cost = Isaac.GetCostumeIdByPath("gfx/characters/"..costs[i]..".anm2")
         if (cost ~= -1) then
             player:AddNullCostume(cost)
         else
-            print("gfx/characters/" .. costs[i] .. ".anm2 not found, check spelling?")
+            print("gfx/characters/"..costs[i]..".anm2 not found, check spelling?")
         end
     end    
 end
